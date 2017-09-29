@@ -1,27 +1,25 @@
 'use strict';
 
 const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-dependencies
-const uuid = require('uuid'); //For stubbed item - remove later
+
+const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports.get = (event, context, callback) => {
-    const timestamp = new Date().getTime();
+  const params = {
+    TableName: process.env.DYNAMODB_TABLE,
+    Key: {
+      id: event.pathParameters.id,
+    },
+  };
 
-    console.log('get id', event.pathParameters.id);
-    
-    const item = {
-        id: uuid.v1(),
-        text: 'Learn Serverless',
-        checked: false,
-        createdAt: timestamp,
-        updatedAt: timestamp,
-      };
-    
+  // fetch todo from the database
+  dynamoDb.get(params, (error, result) => {
+    // handle potential errors
+    if (error) {
+      //Handle error and return
+    }
 
     // create a response
-    const response = {
-      statusCode: 200,
-      body: JSON.stringify(item),
-    };
-    callback(null, response);
-
+    
+  });
 };

@@ -1,7 +1,8 @@
 'use strict';
 
 const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-dependencies
-const uuid = require('uuid'); //For stubbed item - remove later
+
+const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports.update = (event, context, callback) => {
   const timestamp = new Date().getTime();
@@ -18,20 +19,31 @@ module.exports.update = (event, context, callback) => {
     return;
   }
 
-  const item = {
-    id: uuid.v1(),
-    text: data.text,
-    checked: false,
-    createdAt: timestamp,
-    updatedAt: timestamp,
+  const params = {
+    TableName: process.env.DYNAMODB_TABLE,
+    Key: {
+      id: event.pathParameters.id,
+    },
+    ExpressionAttributeNames: {
+      '#todo_text': 'text',
+    },
+    ExpressionAttributeValues: {
+      ':text': data.text,
+      ':checked': data.checked,
+      ':updatedAt': timestamp,
+    },
+    UpdateExpression: 'SET #todo_text = :text, checked = :checked, updatedAt = :updatedAt',
+    ReturnValues: 'ALL_NEW',
   };
 
-  
+  // update the todo in the database
+  dynamoDb.update(params, (error, result) => {
+    // handle potential errors
+    if (error) {
+      //form error response and return
+    }
 
-  // create a response
-  const response = {
-    statusCode: 200,
-    body: JSON.stringify(item),
-  };
-  callback(null, response);
+    // create a response
+    
+  });
 };
