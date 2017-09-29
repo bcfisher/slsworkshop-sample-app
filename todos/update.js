@@ -40,10 +40,20 @@ module.exports.update = (event, context, callback) => {
   dynamoDb.update(params, (error, result) => {
     // handle potential errors
     if (error) {
-      //form error response and return
+      console.error(error);
+      callback(null, {
+        statusCode: error.statusCode || 501,
+        headers: { 'Content-Type': 'text/plain' },
+        body: 'Couldn\'t fetch the todo item.',
+      });
+      return;
     }
 
     // create a response
-    
+    const response = {
+      statusCode: 200,
+      body: JSON.stringify(result.Attributes),
+    };
+    callback(null, response);
   });
 };
