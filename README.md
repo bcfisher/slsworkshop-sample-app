@@ -2,6 +2,12 @@
 
 This sample app was taken from [here](https://github.com/serverless/examples/tree/master/aws-node-rest-api-with-dynamodb)
 
+## Phases
+
+There are two phases in this lab. To go the phase 1 exercise, checkout the
+phase1 tag, e.g. `git checkout phase1`. For phase2, check out phase2
+for the starting point.
+
 ## Software dependencies
 
 To install the uuid library used to generate ids for this sample, do this:
