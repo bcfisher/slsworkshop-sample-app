@@ -164,6 +164,9 @@ code directly without redeploying the entire stack, e.g.
 
 `serverless deploy function --function update --stage myid`
 
+You can view the logs for a function using the logs command,
+for example `serverless logs --stage myid --function get`
+
 ## Clean Up
 
 `serverless remove --stage <badge id>`
