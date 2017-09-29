@@ -153,7 +153,10 @@ curl https://4nynttkjcb.execute-api.us-east-1.amazonaws.com/myid/todos
 {"message": "Internal server error"}
 <pre>
 
+Note that as you add or modify functions you can update the function
+code directly without redeploying the entire stack, e.g.
 
+`serverless deploy function --function update --stage myid`
 
 ## Clean Up
 
