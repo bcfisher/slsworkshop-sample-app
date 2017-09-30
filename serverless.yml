@@ -1,4 +1,4 @@
-service: serverless-rest-api-with-dynamodb
+service: slssample
 
 frameworkVersion: ">=1.1.0 <2.0.0"
 
@@ -63,7 +63,6 @@ resources:
   Resources:
     TodosDynamoDbTable:
       Type: 'AWS::DynamoDB::Table'
-      DeletionPolicy: Retain
       Properties:
         AttributeDefinitions:
           -

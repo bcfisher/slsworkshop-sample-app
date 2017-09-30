@@ -10,6 +10,24 @@ for the starting point.
 
 ## Software dependencies
 
+To use the serverless tools, if you have [node](https://nodejs.org/en/) installed, install the serverless framework via `npm install -g serverless`.
+
+If you don't have node installed, grab the LTS version from the [node](https://nodejs.org/en/) home page.
+
+Alternatively, you can use the docker file in this directory to build a container with the node tools:
+
+<pre>
+docker build --build-arg http_proxy=http://<proxy host>:<proxy port> -t sls .
+</pre>
+
+You can then run the container in your project directory:
+
+<pre>
+docker run -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -it -v $PWD:/sls sls
+</pre>
+
+You'll need to set your credentials as environment variables prior to running the docker container.
+
 To install the uuid library used to generate ids for this sample, do this:
 
     npm install
